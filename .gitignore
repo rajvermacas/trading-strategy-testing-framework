@@ -150,6 +150,23 @@ resources/cache/
 resources/reports/*.html
 resources/reports/*.json
 resources/reports/*.csv
+resources/temp/
 test_data/generated/
 logs/
 *.log
+
+# Temporary files and backups
+*.tmp
+*.bak
+*.backup
+*.orig
+
+# Performance and profiling
+*.prof
+*.profile
+.profiling/
+
+# Development and debugging
+debug/
+.debug/
+*.debug
