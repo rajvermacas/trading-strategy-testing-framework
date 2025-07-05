@@ -1,0 +1,1 @@
+"""Strategy implementations for trading strategy framework."""
