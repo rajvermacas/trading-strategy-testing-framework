@@ -31,6 +31,7 @@ class Trade:
         price: Price per share
         commission: Commission paid for the trade
         slippage: Slippage cost for the trade
+        impact_cost: Market impact cost for the trade (Stage 2)
     """
     timestamp: datetime
     trade_type: TradeType
@@ -38,19 +39,22 @@ class Trade:
     price: float
     commission: float = 0.0
     slippage: float = 0.0
+    impact_cost: float = 0.0
     
     @property
     def total_cost(self) -> float:
         """
-        Calculate total cost of the trade including commission and slippage.
+        Calculate total cost of the trade including all costs (Stage 2 enhancement).
         
         Returns:
             Total cost (positive for buys, negative for sells)
         """
+        total_price_impact = self.price + self.slippage + self.impact_cost
+        
         if self.trade_type == TradeType.BUY:
-            return (self.quantity * (self.price + self.slippage)) + self.commission
+            return (self.quantity * total_price_impact) + self.commission
         else:  # SELL
-            return -((self.quantity * (self.price + self.slippage)) - self.commission)
+            return -((self.quantity * total_price_impact) - self.commission)
     
     def __str__(self) -> str:
         """String representation of the trade."""
@@ -77,10 +81,11 @@ class BacktestEngine:
         """
         self.config = config or {}
         
-        # Initialize configuration with defaults
+        # Initialize configuration with defaults (Stage 2 realistic costs)
         self.initial_capital = self.config.get('initial_capital', 100000.0)
-        self.commission_rate = self.config.get('commission_rate', 0.001)  # 0.1%
-        self.slippage_rate = self.config.get('slippage_rate', 0.0001)     # 0.01%
+        self.commission_rate = self.config.get('commission_rate', 0.0003)  # 0.03% (Stage 2 requirement)
+        self.slippage_rate = self.config.get('slippage_rate', 0.0002)     # 0.02% (Stage 2 requirement)
+        self.impact_cost_rate = self.config.get('impact_cost_rate', 0.0001)  # 0.01% (Stage 2 market impact)
         
         # Initialize state
         self.reset()

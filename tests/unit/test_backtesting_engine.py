@@ -83,8 +83,9 @@ class TestBacktestEngine:
         """Test BacktestEngine initialization with default configuration."""
         engine = BacktestEngine()
         assert engine.initial_capital == 100000.0
-        assert engine.commission_rate == 0.001
-        assert engine.slippage_rate == 0.0001
+        assert engine.commission_rate == 0.0003  # Stage 2: 0.03%
+        assert engine.slippage_rate == 0.0002    # Stage 2: 0.02%
+        assert engine.impact_cost_rate == 0.0001 # Stage 2: 0.01%
         assert engine.current_capital == 100000.0
         assert engine.current_position == 0
         assert engine.trades == []
