@@ -170,3 +170,35 @@ logs/
 debug/
 .debug/
 *.debug
+
+# Additional build and runtime artifacts
+*.sqlite
+*.db
+*.pickle
+*.pkl
+*.npy
+*.npz
+node_modules/
+*.pid
+*.lock
+
+# Coverage and test artifacts
+.coverage*
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+
+# Additional IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.atom/
+.brackets.json
+
+# Additional OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
